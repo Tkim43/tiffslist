@@ -10,7 +10,7 @@ import Item from './item';
 const App = () => (
     <div>
         <Nav/>
-        <div className="container">
+        <div className="">
             <Switch>
                 <Route path="/" exact component={Home}/>
                 <Route path="/sell" component={Sell}/>
