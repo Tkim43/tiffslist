@@ -1,10 +1,10 @@
 # Tiffslist
 > Tiffslist is an American classified advertisements website with sections devoted to for sale items, services, community, gigs, and discussion forums.
 
-# Preview of Website
+## Preview of Website
 > GIF COMING SOON
 
-### Technologies Used
+## Technologies Used
 - React.JS
 - Redux
 - Node.JS
@@ -16,7 +16,7 @@
 - SCSS
 - CSS
 
-### Contributors
+## Contributors
 ##### Tiffany Kim
 > Portfolio
 - https://www.Tiffanyykim.com/
