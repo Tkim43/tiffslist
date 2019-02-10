@@ -22,7 +22,7 @@ class Item extends Component {
         getItemData()
 
     }
-    showModal = (ID, item, description, date, price, location) => {
+    showModal = (ID, item, description, date, price, location, image) => {
         this.setState({
             show: true,
             ID,
@@ -31,6 +31,7 @@ class Item extends Component {
             date,
             price,
             location,
+            image
         })
     }
     hideModal = () => {
@@ -40,14 +41,14 @@ class Item extends Component {
         })
     }
     render() {
-        const{ item, description, date, price, location} = this.state
+        const{ item, description, date, price, location,image} = this.state
         if (this.state.show) {
             return (
                 <div className="modal" onClick={this.hideModal}>
                     <div onClick={e => e.stopPropagation()} className="modal-content">
                         <div onClick={this.hideModal} className="basic-modal-close center">X</div>
                         <div className="card">
-                            <Link to="/"><img className="card-img-top rounded" src={Test} alt="Card image cap" /></Link>
+                            <Link to="/"><img className="card-img-top rounded" src={image} alt="Card image cap" /></Link>
                             <div className="card-body">
                                 <h5 className="card-title"><Link to="/">{item}</Link></h5>
                                 <p className="card-text">{description}</p>
@@ -75,9 +76,9 @@ class Item extends Component {
                 item.date = item.date.substring(0,10);
                 return(
                                 <div className="card col-sm-3" key={i}>
-                                    <img onClick={() => this.showModal(item.i, item.item, item.description, item.date, item.price, item.location)} className="card-img-top rounded" src={item.image} alt="Card image cap" />
+                                    <img onClick={() => this.showModal(item.i, item.item, item.description, item.date, item.price, item.location, item.image)} className="card-img-top rounded" src={item.image} alt="Card image cap" />
                                     <div className="card-body">
-                                        <h5 onClick={()=>this.showModal(item.i, item.item, item.description, item.date, item.price, item.location)} className="card-title text-primary">{item.item}</h5>
+                                        <h5 onClick={()=>this.showModal(item.i, item.item, item.description, item.date, item.price, item.location, item.image)} className="card-title text-primary">{item.item}</h5>
                                         <p className="card-text">{item.description}</p>
                                     </div>
                                     <ul className="list-group list-group-flush midText">
