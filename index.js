@@ -13,17 +13,18 @@ function errorHandling(req, res){
     res.status(req.status || 500).send(req.error || 'Server Error');
 }
 
-app.get('/api/home', async (req, res, next) => {
+app.get('/api/iteminfo/', async (req, res, next) => {
     try {
+        const{ID} = req.params;
         const query = 'SELECT * FROM ??';
-        const inserts = ['fish'];
+        const inserts = ['item'];
 
         const sql = mysql.format(query, inserts);
 
-        const userInfo = await db.query(sql);
+        const iteminfo = await db.query(sql);
         res.send({
             success: true,
-            userInfo
+            iteminfo
         });
 
     } catch (err){
@@ -35,6 +36,9 @@ app.get('/api/home', async (req, res, next) => {
     }
     
 }, errorHandling);
+
+
+
 
 //starts Express server on defined port
 app.listen(PORT, ()=>{
