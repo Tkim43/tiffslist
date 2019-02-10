@@ -16,7 +16,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "npm-run-all --parallel dev:*",
-    "dev:client": "npm start --prefix client",
+    "dev:Client": "npm start --prefix Client",
     "dev:server": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
