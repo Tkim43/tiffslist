@@ -6,6 +6,7 @@ import Sell from './sell';
 import About from './about';
 import Home from './home';
 import Item from './item';
+import '../assets/css/app.scss'
 
 const App = () => (
     <div>

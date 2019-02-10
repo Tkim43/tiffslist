@@ -1,7 +1,7 @@
 {
   "name": "tiffslist",
   "version": "1.0.0",
-  "description": "Starting setup for react redux project",
+  "description": "A website that allows user to purchase and sell items.",
   "main": "index.js",
   "proxy": {
     "/api/*": {

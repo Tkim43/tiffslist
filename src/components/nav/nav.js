@@ -66,8 +66,8 @@ class Nav extends Component{
                         <ul className="nav nav-tabs">
                             {this.renderLinks()}
                         </ul>
-                        <div onClick={this.openNav} className="text-white"> <i className="fas fa-bars"></i></div>
                     </div>
+                    <div onClick={this.openNav} className="menu text-white d-lg-none d-xl-none"> <i className="fas fa-bars"></i></div>
                 </nav>
                 <SideNav/>
             </Fragment>
