@@ -4,31 +4,37 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import {createItemData} from '../actions'
 import '../assets/css/sell.scss'
+import Image from './imageUpload'
 
 
 class Sell extends Component {
-    state = {
-        show: false,
-        ID: null,
-        first: "",
-        last: "",
-        item: "",
-        contact: "",
-        price: null,
-        description: "",
-        location: "",
-        image: "",
+    constructor(props) {
+        super(props)
+        this.state = {
+            show: false,
+            ID: null,
+            first: "",
+            last: "",
+            item: "",
+            contact: "",
+            price: null,
+            description: "",
+            location: "",
+            image: "",
+            file:"",
+            imageCom:{}
+        }
     }
+    // componentDidMount(){
+    //     this.setState({
+    //         imageCom: {...this.props.Image}
+    //     })
+    // }
+    
     handleForm = (event) => {
-        // event.preventDefault();
-        // name, date, item, description, price, contact, location, image
-        console.log("form", event)
-
-        console.log("date", new Date().toISOString());
-
-        
+        // console.log("thisstate", this.state.imageCom)
         const {createItemData, history} = this.props
-        createItemData(event.First + " " + event.last, new Date().toISOString().substring(0, 10), event.description, "image", Number(event.price), event.location, event.item, event.contact);
+        createItemData(event.First + " " + event.last, new Date().toISOString().substring(0, 10), event.description, event.image.name , Number(event.price), event.location, event.item, event.contact);
         history.push('/item');
     }
     renderInput = ({
@@ -48,21 +54,7 @@ class Sell extends Component {
         </div>
     )
 
-    // renderInput(props) {
-    //     console.log("props", props)
-    //     return (
-    //         <div className={`input-group row`}>
-    //             <input className="col form-control" {...props.input} type={props.type || "text"} id={props.input.name} />
-    //             <label className="col" htmlFor={props.input.name} >{props.label}</label>
-    //             <ul>
-    //                 {(props.meta.touched || props.meta.dirty) && props.meta.error && props.meta.error.map((item, index) => {
-    //                     return <li key={index} className="red-text">{item}</li>
-    //                 })}
-    //             </ul>
-    //         </div>
-    //     );
-    // }
-    render() {
+    render(){
         console.log("this is your state in render", this.state)
         console.log("your props", this.props);
         const { handleSubmit } = this.props
@@ -94,6 +86,9 @@ class Sell extends Component {
                     {/* <div className="row">
                         <Field size = "s12" name = "image" label = "" component = {this.renderInput}/>
                     </div> */}
+                    <div className="">
+                        <Field className="text-muted" name="image" type="file" label="Please select an image" component={Image} />
+                    </div>
                     <div className="row justify-content-center">
                         <div className="but-container">
                             <button type="submit" className="submitBut btn btn-lg btn-block">Submit</button>
@@ -106,8 +101,6 @@ class Sell extends Component {
     }
 }
 
-
-
 Sell = reduxForm({
     form: 'Sell',
     validate
@@ -115,14 +108,13 @@ Sell = reduxForm({
 
 function validate({ First,  last, item, description, price, contact, location}){
     const error = {};
-
-    // createItemData(event.First + " " + event.last, new Date().toISOString().substring(0, 10), event.description, "image", Number(event.price), event.location, event.item, event.contact);
-    if(!First) error.First = 'Required';
-    if(!last) error.last = 'Required';
+    if(!First) error.First = 'Please enter your first name';
+    if(!last) error.last = 'Please enter your last name';
     if(!item) error.item = 'Required';
-    if(!description) error.description = 'Required';
-    if(!contact) error.contact = 'Required';
+    if(!description) error.description = 'Must add a description';
+    if(!contact) error.contact = 'Please enter your contact information';
     if(!location) error.location = 'Required';
+    if(!price) error.price = 'Pease enter an amount'
     if(price && isNaN(Number(price))) error.Amount = 'Must be a number'
     return error;
 }
