@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import {createItemData} from '../actions'
 import '../assets/css/sell.scss'
 
 
@@ -19,7 +20,16 @@ class Sell extends Component {
         image: "",
     }
     handleForm = (event) => {
+        // event.preventDefault();
+        // name, date, item, description, price, contact, location, image
         console.log("form", event)
+
+        console.log("date", new Date().toISOString());
+
+        
+        const {createItemData, history} = this.props
+        createItemData(event.First + " " + event.last, new Date().toISOString().substring(0, 10), event.description, "image", Number(event.price), event.location, event.item, event.contact);
+        history.push('/item');
     }
     renderInput = ({
         input,
@@ -32,12 +42,11 @@ class Sell extends Component {
                 <label>{label}</label>
                 <input className="form-control" {...input} placeholder={label} type={type} />
                 {touched &&
-                ((error && <span className="red-text">{error}</span>) ||
+                ((error && <span className="text-danger">{error}</span>) ||
                     (warning && <span>{warning}</span>))}
             </div>
         </div>
     )
-
 
     // renderInput(props) {
     //     console.log("props", props)
@@ -85,15 +94,9 @@ class Sell extends Component {
                     {/* <div className="row">
                         <Field size = "s12" name = "image" label = "" component = {this.renderInput}/>
                     </div> */}
-                    {/* <div className="row">
-                        <div className="col s12 text-danger">{this.props.repeatUserError[1]}</div>
-                    </div>
-                    <div className="row">
-                        <div className="col s12 text-danger">{this.props.repeatUserError[0]}</div>
-                    </div> */}
                     <div className="row justify-content-center">
-                        <div className="">
-                            <button className="lighten-2 btn">Submit</button>
+                        <div className="but-container">
+                            <button type="submit" className="submitBut btn btn-lg btn-block">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -103,10 +106,26 @@ class Sell extends Component {
     }
 }
 
+
+
 Sell = reduxForm({
     form: 'Sell',
-    // validate: validate
+    validate
 })(Sell);
+
+function validate({ First,  last, item, description, price, contact, location}){
+    const error = {};
+
+    // createItemData(event.First + " " + event.last, new Date().toISOString().substring(0, 10), event.description, "image", Number(event.price), event.location, event.item, event.contact);
+    if(!First) error.First = 'Required';
+    if(!last) error.last = 'Required';
+    if(!item) error.item = 'Required';
+    if(!description) error.description = 'Required';
+    if(!contact) error.contact = 'Required';
+    if(!location) error.location = 'Required';
+    if(price && isNaN(Number(price))) error.Amount = 'Must be a number'
+    return error;
+}
 
 function mapStateToProps(state) {
     const { item } = state
@@ -115,6 +134,7 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {
 
+export default connect(mapStateToProps, {
+    createItemData,
 })(Sell);

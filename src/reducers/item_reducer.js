@@ -9,7 +9,7 @@ const DEFAULT_STATE = {
 export default (state=DEFAULT_STATE, action) => {
     switch(action.type){
         case types.CREATE_ITEM_DATA:
-            console.log("action", action.payload)
+            console.log("action", ...state, action.payload)
             return{...state, data: action.payload}
         case types.GET_ITEM_DATA:
             return{...state, data: action.payload.data.iteminfo}
