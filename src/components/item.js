@@ -16,10 +16,25 @@ class Item extends Component {
         date:"",
         price: "",
         location:"",
+        file:""
     }
-    componentDidMount() {
+    componentDidMount(){
         const { getItemData } = this.props
         getItemData()
+        // var preview = document.querySelector('img');
+        //   var file    = event.target.name.files[0];
+        //   var reader  = new FileReader();
+    
+        //   reader.addEventListener("load", function () {
+        //     preview.src = reader.result;
+        //   }, false);
+    
+        //   if (file) {
+        //     reader.readAsDataURL(file);
+        //   }
+        // this.setState({
+        //     file
+        // })
 
     }
     showModal = (ID, item, description, date, price, location, image) => {
@@ -31,8 +46,14 @@ class Item extends Component {
             date,
             price,
             location,
-            image
+            image,
         })
+    }
+    onChange=(e)=>{
+        // let reader = new FileReader();
+        // reader.onload = e => this.setState({ file: reader.result });
+        // reader.readAsDataURL(e.target.files[0]);
+          
     }
     hideModal = () => {
         this.setState({
