@@ -30,7 +30,34 @@ app.get('/api/iteminfo/', async (req, res, next) => {
     } catch (err){
         console.log('Error:', err);
         req.status = 500;
-        req.error = 'Error getting user information';
+        req.error = 'Error getting item information';
+
+        return next();
+    }
+    
+}, errorHandling);
+
+app.post('/api/createItem/name/:name/date/:date/description/:description/image/:image/price/:price/location/:location/item/:item/contact/:contact/', async (req, res, next) => {
+    
+    try {
+        const{name, date, description, image, price, location, item, contact} = req.params;
+        name, date, description, image, price, location, item, contact
+        const query = 'INSERT INTO ?? (??,??,??,??,??,??,??,??) VALUES (?,?,?,?,?,?,?,?)';
+        const inserts = ['item', 'name', 'date', 'description', 'image', 'price', 'location', 'item', 'contact', name, date, description, image, price, location, item, contact];
+
+        const sql = mysql.format(query, inserts);
+
+        const iteminfo = await db.query(sql);
+        res.send({
+            success: true,
+            iteminfo
+        });
+
+    } catch (err){
+        console.log("req", req)
+        console.log('Error:', err);
+        req.status = 500;
+        req.error = 'Error creating item';
 
         return next();
     }
