@@ -190,7 +190,7 @@ class Sell extends Component {
 						</div>
 					</div>
 				</div>
-
+                <div className="space"></div>
             </div>
         )
     }

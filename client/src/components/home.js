@@ -57,6 +57,7 @@ class Home extends Component{
                 <p>Click preview to start.</p>
                 <button className="btn btn-info btn-lg" onClick={this.showModal} role="button">Preview</button>
             </div>
+            <div className="space"></div>
         </div>
         )
     }
