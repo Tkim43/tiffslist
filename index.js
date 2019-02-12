@@ -2,12 +2,23 @@ const express = require('express');
 const mysql = require('mysql');
 const db = require('./Server/db');
 const app = express();
+const cors = require('cors');
 const { resolve } = require('path');
 const PORT = process.env.PORT || 9000;
 
+
 app.use(express.static(resolve(__dirname,'client','dist')));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+
+// require('./routes/api/image.js');
+
+// module.exports = router;
+
+const profile = require( './routes/api/profile' );
+app.use( '/api/profile', profile); 
+
 
 function errorHandling(req, res){
     res.status(req.status || 500).send(req.error || 'Server Error');
