@@ -1,0 +1,32 @@
+.container{
+    .page-header{
+        margin: 5%;
+        color: #a88809c7;
+        font-family: 'Dancing Script', cursive;
+    }
+}
+.button{
+    margin: 2%;
+    padding: 1%;
+}
+
+.but-container{
+    margin: 2%;
+    width: 30%;
+    .submitBut{
+        background: #2c3e50;
+        font-size: 2rem;
+        color: white;
+        
+    }
+}
+.labelInputContainer{
+    width: 100%;
+    .input-container{
+        width: 100%;
+        input{
+            height: 100%;
+            padding: inherit
+        }
+    }
+}

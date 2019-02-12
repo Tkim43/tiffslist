@@ -1,0 +1,75 @@
+body {
+background-color: #f1f1f1;
+}
+
+.main {
+max-width: 1000px;
+margin: auto;
+}
+
+h2{
+margin-top: 4%;
+    a{
+        color: #a88809c7;
+    }
+    
+}
+
+h3{
+    font-family: 'Permanent Marker', cursive;
+    color: rgb(3, 35, 53);
+
+}
+p{
+    font-family:'Cinzel', serif;
+}
+h1 {
+text-align: center;
+font-size: 50px;
+margin: 1%;
+word-break: break-all;
+font-family: 'Satisfy', cursive;
+}
+
+.row {
+margin: 8px -16px;
+}
+
+.row,
+.row > .column {
+padding: 8px;
+}
+
+.column {
+float: left;
+width: 25%;
+}
+
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+.content {
+background-color: white;
+padding: 10px;
+}
+
+@media screen and (max-width: 900px) {
+.column {
+    width: 50%;
+}
+}
+
+@media screen and (max-width: 600px) {
+.column {
+    width: 100%;
+}
+}
+
+.container {
+img{
+    width: 100%;
+}
+}
