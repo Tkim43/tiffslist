@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import '../assets/css/sell.scss'
-// import {connect} from 'react-redux'
-// import {itemData} from '../actions/index'
+import {connect} from 'react-redux'
 
 class ImageUpload  extends Component{
   constructor(props) {
@@ -50,17 +49,12 @@ class ImageUpload  extends Component{
 }
 }
 
-// function mapStateToProps(state) {
-//   const { item } = state
-//   return {
-//       data: item,
-//       // single: state.file
-//   }
-// }
+function mapStateToProps(state) {
+  const { item } = state
+  return {
+      data: item
+  }
+}
 
 
-// export default connect(mapStateToProps, {
-//   itemData,
-// })(ImageUpload);
-
-export default ImageUpload;
+export default connect(mapStateToProps, {})(ImageUpload);

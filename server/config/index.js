@@ -1,4 +1,5 @@
 module.exports = {
     dbConfig: require('./mysqlCredentials.js'),
-    // jwtConfig: require('./jwt')
+    // need template for s3config file
+    // s3Config: require('./s3')
 }

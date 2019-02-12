@@ -8,12 +8,8 @@ const DEFAULT_STATE = {
 
 export default (state=DEFAULT_STATE, action) => {
     switch(action.type){
-        // case types.IMAGE_DATA:
-        //     console.log("action", ...state, action.payload)
-        //     return{...state, data: action.payload, single: action.payload}
         case types.CREATE_ITEM_DATA:
-            console.log("action", ...state, action.payload)
-            return{...state, data: action.payload}
+            return{...state}
         case types.GET_ITEM_DATA:
             return{...state, data: action.payload.data.iteminfo}
         default:

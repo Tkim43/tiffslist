@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import {createItemData} from '../actions'
 import '../assets/css/sell.scss'
-import Image from './imageUpload'
+// import Image from './imageUpload'
 
 
 class Sell extends Component {
@@ -21,36 +21,14 @@ class Sell extends Component {
             description: "",
             location: "",
             image: "",
-            // file:{...this.props.Image},
-            // imageCom:{}
+    
         }
     }
-    // componentDidMount(){
-    //     this.setState({
-    //         imageCom: {...this.props.Image}
-    //     })
-    // }
     
-    handleForm = (event) => {
-        // console.log("thisstate", this.state.imageCom)
-        // var reader  = new FileReader();
-        // let file = event.item.name
-        //   reader.addEventListener("load", function () {
-        //     preview.src = reader.result;
-
-        //   }, false);
-
-        //   if (file) {
-        //     reader.readAsDataURL(file);
-        //     console.log("reader in sell", reader)
-        //   }
-        // console.log("reader result", reader.result)
-
-
-        // console.log("these are your props in sell" , this.props)
+    handleForm = async (event) => {
         debugger;
-        const {createItemData, history} = this.props
-        createItemData(event.First + " " + event.last, new Date().toISOString().substring(0, 10), event.description, "event.image.name" , Number(event.price), event.location, event.item, event.contact);
+        const {createItemData,history} = this.props
+        await createItemData(event.First + " " + event.last, new Date().toISOString().substring(0, 10), event.description, Number(event.price), event.location, "iasdfasdf", event.item, event.contact);
         
         // const data = {
         //     name: event.First + " " + event.last,
@@ -108,7 +86,7 @@ class Sell extends Component {
                         <Field className="col" name="price" type="number" label="Price" component={this.renderInput} />
                     </div>
                     <div className="">
-                        <Field  nclassName="col" name="contact" type="text" label="Contact Information" component={this.renderInput} />
+                        <Field  className="col" name="contact" type="text" label="Contact Information" component={this.renderInput} />
                     </div>
                     <div className="">
                         <Field  className="col" name="location" type="text" label="Location" component={this.renderInput} />
@@ -116,12 +94,12 @@ class Sell extends Component {
                     {/* <div className="row">
                         <Field size = "s12" name = "image" label = "" component = {this.renderInput}/>
                     </div> */}
-                    <div className="">
+                    {/* <div className="">
                         <Field className="text-muted" name="image" type="file" label="Please select an image" component={Image} />
-                    </div>
+                    </div> */}
                     <div className="row justify-content-center">
                         <div className="but-container">
-                            <button type="submit" className="submitBut btn btn-lg btn-block">Submit</button>
+                            <button className="submitBut btn btn-lg btn-block">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -132,8 +110,8 @@ class Sell extends Component {
 }
 
 Sell = reduxForm({
-    form: 'Sell'
-    // validate
+    form: 'Sell',
+    validate
 })(Sell);
 
 function validate({ First,  last, item, description, price, contact, location}){

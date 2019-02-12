@@ -10,8 +10,8 @@ export async function getItemData(){
     
 }
 
-export async function createItemData(name, date, description, image, price, location, item, contact){
-    const resp = await axios.post(`/api/createItem/name/${name}/date/${date}/description/${description}/image/${image}/price/${price}/location/${location}/item/${item}/contact/${contact}/`);
+export async function createItemData(name, date, description, price, location, image, item, contact){
+    const resp = await axios.post(`/api/createItem/name/${name}/date/${date}/description/${description}/price/${price}/location/${location}/image/${image}/item/${item}/contact/${contact}/`);
     return{
         type: types.CREATE_ITEM_DATA,
         payload: resp
@@ -19,22 +19,22 @@ export async function createItemData(name, date, description, image, price, loca
     
 }
 
-export async function createItem(item){
-    const resp = await axios.post('/api/createItem', {
+// export async function createItem(item){
+//     const resp = await axios.post('/api/createItem', {
 
-    });
+//     });
     
-    return{
-        type: types.CREATE_ITEM_DATA,
-        payload: resp
-    }
-}
-
-
-// export async function createItemData(){
-//     const resp = await axios.get(`/api/createItem/`)
 //     return{
 //         type: types.CREATE_ITEM_DATA,
+//         payload: resp
+//     }
+// }
+
+
+// export async function createImage(){
+//     const resp = await axios.post(`/api/image/`)
+//     return{
+//         type: types.CREATE_IMAGE,
 //         payload: resp
 //     }
     
