@@ -3,3 +3,4 @@
 node_modules
 
 Server/config/mysqlCredentials.js
+Server/config/aws.js
