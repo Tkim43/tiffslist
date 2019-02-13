@@ -45,7 +45,7 @@ class About extends Component {
                             <div className="content">
                                 <img src={Count}  alt="Fish Notes" />
                                 <h3>Latest Personal Project</h3>
-                                <p><a href="https://github.com/Tkim43/fish-notes-react">Fish Notes</a></p>
+                                <p><a href="http://fish-notes.tiffanyykim.com/">Fish Notes</a></p>
                                 <p><a href="https://github.com/Tkim43/fish-notes-react">GitHub</a></p>
                             </div>
                         </div>
@@ -57,6 +57,7 @@ class About extends Component {
                         <p><a href="https://github.com/Learning-Fuze/c918_uberquizlet">GitHub</a></p>
                     </div>
                 </div>
+                <div className="space"></div>
             </Fragment>
         )
     }

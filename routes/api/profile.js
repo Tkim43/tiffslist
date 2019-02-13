@@ -5,17 +5,17 @@ const aws = require( 'aws-sdk' );
 const multerS3 = require( 'multer-s3' );
 const multer = require('multer');
 const path = require( 'path' );
+const s3Config = require('../../server/config/aws');
 
 const router = express.Router();
 
 /**
  * PROFILE IMAGE STORING STARTS
  */
-const s3 = new aws.S3({
-	accessKeyId: 'AKIAJX73AYWJHHWUREYQ',
-	secretAccessKey: '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',
-	Bucket: 'tiffslistbucket'
-});
+
+aws.config.update(s3Config);
+
+const s3 = new aws.S3();
 
 /**
  * Single Upload
@@ -23,9 +23,10 @@ const s3 = new aws.S3({
 const profileImgUpload = multer({
 	storage: multerS3({
 		s3: s3,
-		bucket: 'tiffslistbucket',
-		acl: 'public-read',
+		bucket: s3Config.bucket,
+		acl: 'private',
 		key: function (req, file, cb) {
+
 			cb(null, path.basename( file.originalname, path.extname( file.originalname ) ) + '-' + Date.now() + path.extname( file.originalname ) )
 		}
 	}),
