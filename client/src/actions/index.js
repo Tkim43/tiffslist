@@ -28,12 +28,20 @@ export async function storeImage(image, itemID){
 
 }
 
-
-// export async function createImage(){
-//     const resp = await axios.post(`/api/image/`)
+// export async function getImage(ID){
+//     const resp = await axios.post(`/api/imageurl/ID/${ID}/`)
 //     return{
-//         type: types.CREATE_IMAGE,
+//         type: types.GET_IMAGE,
 //         payload: resp
 //     }
     
 // }
+
+export async function getImage(){
+    const resp = await axios.get(`/api/imageurl/`)
+    return{
+        type: types.GET_IMAGE,
+        payload: resp
+    }
+    
+}

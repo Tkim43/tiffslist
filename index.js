@@ -105,11 +105,35 @@ app.post('/api/images/itemID/:itemID', async (req, res, next) => {
     
 }, errorHandling);
 
-app.get('/api/imageurl/ID/:ID/itemID/:itemID', async (req, res, next) => {
+// app.get('/api/imageurl/ID/:ID/', async (req, res, next) => {
+//     try {
+//         const{ID} = req.params;
+//         const query = 'SELECT * FROM ?? WHERE ?? = ?';
+//         const inserts = ['images', 'ID', ID];
+
+//         const sql = mysql.format(query, inserts);
+
+//         const imageurl = await db.query(sql);
+//         res.send({
+//             success: true,
+//             imageurl,
+//         });
+
+//     } catch (err){
+//         console.log('Error:', err);
+//         req.status = 500;
+//         req.error = 'Error getting image URL';
+
+//         return next();
+//     }
+    
+// }, errorHandling);
+
+app.get('/api/imageurl/', async (req, res, next) => {
     try {
-        const{ID, itemID} = req.params;
-        const query = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
-        const inserts = ['images', 'ID', ID, 'itemID', itemID];
+        // const{ID} = req.params;
+        const query = 'SELECT * FROM ??';
+        const inserts = ['images'];
 
         const sql = mysql.format(query, inserts);
 

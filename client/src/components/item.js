@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { getItemData } from '../actions/index'
+import { getItemData , getImage} from '../actions/index'
 import Test from '../assets/images/sample.png'
 import { connect } from 'react-redux';
 import '../assets/css/item.scss'
@@ -19,8 +19,9 @@ class Item extends Component {
         file:""
     }
     componentDidMount(){
-        const { getItemData } = this.props
-        getItemData()
+        const { getItemData, getImage} = this.props
+        getItemData();
+        getImage();
         // var preview = document.querySelector('img');
         //   var file    = event.target.name.files[0];
         //   var reader  = new FileReader();
@@ -62,7 +63,8 @@ class Item extends Component {
         })
     }
     render() {
-        const{ item, description, date, price, location, image} = this.state
+        const{ item, description, date, price, location, } = this.state
+        console.log("these are your props", this.props);
         if (this.state.show) {
             return (
                 <div className="modal" onClick={this.hideModal}>
@@ -85,6 +87,9 @@ class Item extends Component {
             )
         }
         return (
+            // if(!this.props.data){
+            //     return
+            // }
             <div className="all">
                 <div className="row">
                     <div className="col-12 card-container">
@@ -92,12 +97,13 @@ class Item extends Component {
                             <h1>Buy, Sell, Look and Trade.</h1>
                         </div>
                         <div className="row justify-content-center" >
-                        {this.props.data ?
-            this.props.data.map ((item, i) => {
+                        {this.props.imgurl && this.props.data ?
+        this.props.data.map ((item, i) => {
+            //    console.log("image", this.props.imgurl[i].image)
                 item.date = item.date.substring(0,10);
                 return(
                                 <div className="card col-sm-3" key={i}>
-                                    <img onClick={() => this.showModal(item.i, item.item, item.description, item.date, item.price, item.location, item.image)} className="card-img-top rounded" src={Test} alt="Card image cap" />
+                                    <img onClick={() => this.showModal(item.i, item.item, item.description, item.date, item.price, item.location, item.image)} className="card-img-top rounded" src={this.props.imgurl[i].image} alt="Card image cap" />
                                     <div className="card-body">
                                         <h5 onClick={()=>this.showModal(item.i, item.item, item.description, item.date, item.price, item.location, item.image)} className="card-title text-primary">{item.item}</h5>
                                         <p className="card-text">{item.description}</p>
@@ -110,7 +116,7 @@ class Item extends Component {
                                 </div>
                             )
                         })
-                            : <h1>There are no items for sale</h1>
+                            : <h2>There are no items for sale</h2>
                         }
                             </div>
                     </div>
@@ -125,9 +131,12 @@ class Item extends Component {
 function mapStateToProps(state) {
     const { item } = state
     return {
-        data: item.data
+        data: item.data,
+        all: item,
+        imgurl: item.images
     }
 }
 export default connect(mapStateToProps, {
     getItemData,
+    getImage
 })(Item);

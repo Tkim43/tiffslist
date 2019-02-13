@@ -6,7 +6,7 @@ export default props =>{
     return (
     <div className="not-found-container">
         <div className="not-found-body">
-            <h1>404 Page Not Found</h1>
+            <h2>404 Page Not Found</h2>
             <Link to="/">Return Home</Link>
         </div>
     </div>
