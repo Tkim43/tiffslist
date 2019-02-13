@@ -35,7 +35,7 @@ app.get('/api/iteminfo/', async (req, res, next) => {
         const iteminfo = await db.query(sql);
         res.send({
             success: true,
-            iteminfo
+            iteminfo,
         });
 
     } catch (err){
@@ -48,20 +48,21 @@ app.get('/api/iteminfo/', async (req, res, next) => {
     
 }, errorHandling);
 
-app.post('/api/createItem/name/:name/date/:date/description/:description/price/:price/location/:location/image/:image/item/:item/contact/:contact/', async (req, res, next) => {
+app.post('/api/createItem/name/:name/date/:date/description/:description/price/:price/location/:location/item/:item/contact/:contact/', async (req, res, next) => {
     
     try {
-        const{name, date, description, price, location, image, item, contact} = req.params;
+        const{name, date, description, price, location, item, contact} = req.params;
         // name, date, description, image, price, location, item, contact
-        const query = 'INSERT INTO ?? (??,??,??,??,??,??,??,??) VALUES (?,?,?,?,?,?,?,?)';
-        const inserts = ['item', 'name', 'date', 'description', 'price','location', 'image','item', 'contact', name, date, description, price, location, image, item, contact];
+        const query = 'INSERT INTO ?? (??,??,??,??,??,??,??) VALUES (?,?,?,?,?,?,?)';
+        const inserts = ['item', 'name', 'date', 'description', 'price','location','item', 'contact', name, date, description, price, location, item, contact];
 
         const sql = mysql.format(query, inserts);
-
         const iteminfo = await db.query(sql);
+
         res.send({
             success: true,
-            iteminfo
+            iteminfo,
+            newID: iteminfo.insertId
         });
 
     } catch (err){
@@ -75,31 +76,58 @@ app.post('/api/createItem/name/:name/date/:date/description/:description/price/:
     
 }, errorHandling);
 
-// app.post('/api/image/', async (req, res, next) => {
+app.post('/api/images/itemID/:itemID', async (req, res, next) => {
+
+    try {
+        // const{image} = req.body;
+        const{itemID} = req.params;
+        const {image} = req.body;
+
+        const query = 'INSERT INTO ?? (??, ??) VALUES (?,?)';
+        const inserts = ['images', 'itemID', 'image', itemID, image];
+
+        const sql = mysql.format(query, inserts);
+
+        const iteminfo = await db.query(sql);
+        res.send({
+            success: true,
+            iteminfo
+        });
+
+    } catch (err){
+        console.log("req", req)
+        console.log('Error:', err);
+        req.status = 500;
+        req.error = 'Error storing Image';
+
+        return next();
+    }
     
-//     try {
-//         const{image} = req.body;
-//         const query = 'INSERT INTO ?? (??) VALUES (?)';
-//         const inserts = ['item', 'image', image];
+}, errorHandling);
 
-//         const sql = mysql.format(query, inserts);
+app.get('/api/imageurl/ID/:ID/itemID/:itemID', async (req, res, next) => {
+    try {
+        const{ID, itemID} = req.params;
+        const query = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
+        const inserts = ['images', 'ID', ID, 'itemID', itemID];
 
-//         const iteminfo = await db.query(sql);
-//         res.send({
-//             success: true,
-//             iteminfo
-//         });
+        const sql = mysql.format(query, inserts);
 
-//     } catch (err){
-//         console.log("req", req)
-//         console.log('Error:', err);
-//         req.status = 500;
-//         req.error = 'Error creating item';
+        const imageurl = await db.query(sql);
+        res.send({
+            success: true,
+            imageurl,
+        });
 
-//         return next();
-//     }
+    } catch (err){
+        console.log('Error:', err);
+        req.status = 500;
+        req.error = 'Error getting image URL';
+
+        return next();
+    }
     
-// }, errorHandling);
+}, errorHandling);
 
 
 

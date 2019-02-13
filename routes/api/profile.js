@@ -7,6 +7,8 @@ const multer = require('multer');
 const path = require( 'path' );
 const s3Config = require('../../server/config/aws');
 
+const {accessKeyId, secretAccessKey, bucket} = require('../../server/config/aws');
+const db = require('../../server/db');
 const router = express.Router();
 
 /**
@@ -77,6 +79,8 @@ router.post( '/profile-img-upload', ( req, res ) => {
 				// If Success
 				const imageName = req.file.key;
 				const imageLocation = req.file.location;
+
+				
 // Save the file name into database into profile model
 				res.json( {
 					image: imageName,
@@ -86,6 +90,39 @@ router.post( '/profile-img-upload', ( req, res ) => {
 		}
 	});
 });
+
+exports.getImages = async (req, res) => {
+    const images = await db.query('SELECT * FROM `images`');
+
+    res.send({
+        success: true,
+        images
+    });
+}
+
+// example
+// exports.getObjects = function (req, res) {
+//     var item = req.body;
+//     var params = { Bucket: req.params.bucketName, Key: 'keyname'}; // keyname can be a filename
+//     s3.getObject(params, function (err, data) {
+//         if (err) {
+//             return res.send({ "error": err });
+//         }
+//         res.send({ data });
+//     });
+// }
+
+exports.getObjects = function (req, res) {
+    const {image} = req.body;
+    var params = { Bucket: 'tiffslist', Key: 'me.png'}; // keyname can be a filename
+    s3.getObject(params, function (err, data) {
+        if (err) {
+            return res.send({ "error": err });
+        }
+        res.send({ data });
+    });
+}
+
 
 
 module.exports = router;
