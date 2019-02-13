@@ -45,6 +45,9 @@ class Sell extends Component {
     renderInput = ({
         input,
         label,
+        max,
+        maxLength,
+        min,
         pattern,
         type,
         meta: { touched, error, warning }
@@ -54,7 +57,7 @@ class Sell extends Component {
         <div className="form-row form-group-row">
             <div className="col">
                 <label>{label}</label>
-                <input className="form-control" {...input} placeholder={label} pattern={pattern} type={type} />
+                <input  max={max} min={min} maxLength={maxLength} className="form-control" {...input} placeholder={label} pattern={pattern} type={type} />
                 {touched &&
                 ((error && <span className="text-danger">{error}</span>) ||
                     (warning && <span>{warning}</span>))}
@@ -73,24 +76,24 @@ class Sell extends Component {
                 </div>
                 <form onSubmit={handleSubmit(this.handleForm)}>
                     <div className="" >
-                        <Field  className="col-6" name="First" label="First Name" component={this.renderInput} />
-                        <Field  className="col-6" name="last" label="Last Name" component={this.renderInput} />
+                        <Field  maxLength="20" className="col-6" name="First" label="First Name" component={this.renderInput} />
+                        <Field  maxLength="20" className="col-6" name="last" label="Last Name" component={this.renderInput} />
                     </div>
                     <div className="">
-                        <Field  className="col" name="item" type="text" label="Item for sale" component={this.renderInput} />
+                        <Field  maxLength="25" className="col" name="item" type="text" label="Item for sale" component={this.renderInput} />
                     </div>
                     <div className="">
-                        <Field  className="col" name="description" type="text" label="Description" component={this.renderInput} />
+                        <Field  maxLength="150" className="col" name="description" type="text" label="Description" component={this.renderInput} />
                     </div>
                     <div className="">
-                        <Field className="col" name="price" type="number" label="Price" component={this.renderInput} />
+                        <Field  maxLength="7" pattern="\d*" className="col" name="price" type="text" label="Price" component={this.renderInput} />
                     </div>
                     <div className="">
-                        <Field  placeholder="" className="col" name="contact" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel" label="Phone Number" component={this.renderInput} />
+                        <Field  maxLength="12" placeholder="" className="col" name="contact" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel" label="Phone Number" component={this.renderInput} />
                         <label className="text-muted">Format: 714-123-1234</label>
                     </div>
                     <div className="">
-                        <Field  className="col" name="location" type="text" label="Location" component={this.renderInput} />
+                        <Field  maxLength="30" className="col" name="location" type="text" label="Location" component={this.renderInput} />
                     </div>
 
                     
