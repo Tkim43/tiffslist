@@ -8,6 +8,8 @@ const DEFAULT_STATE = {
 
 export default (state=DEFAULT_STATE, action) => {
     switch(action.type){
+        case types.GET_IMAGE:
+            return{...state, images: action.payload.data.imageurl,}
         case types.STORE_IMAGE:
             return{...state}
         case types.CREATE_ITEM_DATA:

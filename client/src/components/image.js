@@ -2,17 +2,32 @@ import React, {Component,Fragment} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import $ from 'jquery';
+import '../assets/css/image.scss'
 import {storeImage} from '../actions/index'
 
 class Image extends Component{
     state={
         selectedFile: null,
-        selectedFiles: null
+        selectedFiles: null,
+        file: null,
+        fileName: "",
     }
     singleFileChangedHandler = ( event ) => {
 		this.setState({
 			selectedFile: event.target.files[0]
         });
+        var preview = document.querySelector('img');
+          var file    = document.querySelector('input[type=file]').files[0];
+          var reader  = new FileReader();
+
+          reader.addEventListener("load", function () {
+            preview.src = reader.result;
+
+          }, false);
+
+          if (file) {
+            reader.readAsDataURL(file);
+          }
         console.log("selected file",event.target.files[0] )
         console.log("this is your props", this.props);
 
@@ -35,28 +50,40 @@ class Image extends Component{
 						// If file size is larger than expected.
 						if( response.data.error ) {
 							if ( 'LIMIT_FILE_SIZE' === response.data.error.code ) {
-								this.ocShowAlert( 'Max size: 2MB', 'red' );
+								this.ocShowAlert( 'Max size: 2MB', '#ff8a80' );
 							} else {
 								console.log( response.data );
 // If not the given file type
-								this.ocShowAlert( response.data.error, 'red' );
+								this.ocShowAlert( response.data.error, '#ff8a80' );
 							}
 						} else {
-							// Success
-							let fileName = response.data;
+                            // Success
+                            var fileName = response.data;
+                            this.setState({
+                                fileName
+                            })
                             console.log( 'filedata', fileName );
                             const { match: { params } } = this.props;
                             storeImage(fileName.location, params.itemID);
-							this.ocShowAlert( 'File Uploaded', '#3089cf' );
+                            this.ocShowAlert( 'File Uploaded', '#3089cf' );
+                            if (fileName) {
+                                console.log("it went in the success")
+                                const{history} = this.props;
+                                history.push('/item')
+                            }
+                            
+                            
+
+							
 						}
 					}
 				}).catch( ( error ) => {
 				// If another error
-				this.ocShowAlert( error, 'red' );
+				this.ocShowAlert( error, '#ff8a80' );
 			});
 		} else {
 			// if file not selected throw error
-			this.ocShowAlert( 'Please upload file', 'red' );
+			this.ocShowAlert( 'Please upload a file', '#ff8a80' );
 		}
     };
     
@@ -73,26 +100,39 @@ class Image extends Component{
 			$( alertEl ).remove();
 		}, 3000 );
 	};
+    newMethod() {
+        $("#somediv").addClass("thisClass");
+    }
+
     render(){
+        console.log("this is your props", this.props)
+        // if(this.state.fileName === ){
+        //     return(
+        //         <div className="loading container justify-content-center">
+        //             <div className="loader"></div>
+        //         </div>
+        //     )
+        // }
         return(
-            <Fragment>
-            <div id="oc-alert-container"></div>
+            <div className="container">
+            <div className="text-white" id="oc-alert-container"></div>
 				{/* Single File Upload*/}
 				<div className="card border-light mb-3 mt-5" style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}>
 					<div className="card-header">
-						<h3 style={{ color: '#555', marginLeft: '12px' }}>Single Image Upload</h3>
+						<h3 style={{ color: '#555', marginLeft: '12px' }}>Image Uploader</h3>
 						<p className="text-muted" style={{ marginLeft: '12px' }}>Upload Size: 250px x 250px ( Max 2MB )</p>
 					</div>
 					<div className="card-body">
-						<p className="card-text">Please upload an image for your profile</p>
+						<p className="card-text">Please upload an image for the item you wish to sell.</p>
 						<input type="file" onChange={this.singleFileChangedHandler}/>
 						<div className="mt-5">
 							<button className="btn btn-info" onClick={this.singleFileUploadHandler}>Upload!</button>
 						</div>
 					</div>
 				</div>
+                <img></img>
                 <div className="space"></div>
-                </Fragment>
+                </div>
         )
     }
 }
