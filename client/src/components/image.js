@@ -13,6 +13,7 @@ class Image extends Component{
         fileName: "",
     }
     singleFileChangedHandler = ( event ) => {
+
 		this.setState({
 			selectedFile: event.target.files[0]
         });
@@ -33,7 +34,7 @@ class Image extends Component{
 
     };
     
-    singleFileUploadHandler = ( event ) => {
+    singleFileUploadHandler = async ( event ) => {
 		const data = new FormData();
 // If file selected
 		if ( this.state.selectedFile ) {
@@ -63,16 +64,17 @@ class Image extends Component{
                                 fileName
                             })
                             console.log( 'filedata', fileName );
+        
                             const { match: { params } } = this.props;
-                            storeImage(fileName.location, params.itemID);
-                            this.ocShowAlert( 'File Uploaded', '#3089cf' );
-                            if (fileName) {
-                                console.log("it went in the success")
-                                const{history} = this.props;
-                                history.push('/item')
-                            }
-                            
-                            
+                            this.saveImage(fileName.location, params.itemID)
+
+
+                                this.ocShowAlert( 'File Uploaded', '#3089cf' );
+                                // if (response.data) {
+                                //     console.log("it went in the success")
+                                //     const{history} = this.props;
+                                //     history.push('/item')
+                                // }
 
 							
 						}
@@ -86,6 +88,14 @@ class Image extends Component{
 			this.ocShowAlert( 'Please upload a file', '#ff8a80' );
 		}
     };
+
+    saveImage = async (file, itemID)=>{
+        debugger;
+        const {storeImage,history} = this.props
+        await storeImage(file, itemID);
+        await history.push('/item')
+    }
+
     
     ocShowAlert = ( message, background = '#3089cf' ) => {
 		let alertContainer = document.querySelector( '#oc-alert-container' ),
@@ -146,5 +156,5 @@ function mapStateToProps(state) {
 
 
 export default connect(mapStateToProps, {
-    // storeImage,
+    storeImage,
 })(Image);

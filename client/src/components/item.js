@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { getItemData , getImage} from '../actions/index'
 import Test from '../assets/images/sample.png'
 import { connect } from 'react-redux';
+import None from '../assets/images/noimage.jpeg'
 import '../assets/css/item.scss'
 import '../assets/css/modal.scss'
 
@@ -18,7 +19,10 @@ class Item extends Component {
         location:"",
         file:""
     }
-    componentDidMount(){
+    componentDidUpdate(){
+
+    }
+    componentDidMount (){
         const { getItemData, getImage} = this.props
         getItemData();
         getImage();
@@ -103,7 +107,12 @@ class Item extends Component {
                 item.date = item.date.substring(0,10);
                 return(
                                 <div className="card col-sm-3" key={i}>
-                                    <img onClick={() => this.showModal(item.i, item.item, item.description, item.date, item.price, item.location, item.image)} className="card-img-top rounded" src={this.props.imgurl[i].image} alt="Card image cap" />
+                                {this.props.imgurl === undefined ?
+                                <img src={None}></img>
+                                   : <img onClick={() => this.showModal(item.i, item.item, item.description, item.date, item.price, item.location, item.image)} className="card-img-top rounded" src={this.props.imgurl[i].image} alt="Card image cap" />
+                        
+                                
+                                }
                                     <div className="card-body">
                                         <h5 onClick={()=>this.showModal(item.i, item.item, item.description, item.date, item.price, item.location, item.image)} className="card-title text-primary">{item.item}</h5>
                                         <p className="card-text">{item.description}</p>
