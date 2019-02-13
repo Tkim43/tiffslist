@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { getItemData , getImage} from '../actions/index'
+import { getAllData} from '../actions/index'
 import Test from '../assets/images/sample.png'
 import { connect } from 'react-redux';
 import None from '../assets/images/noimage.jpeg'
@@ -19,13 +19,11 @@ class Item extends Component {
         location:"",
         file:""
     }
-    componentDidUpdate(){
-
-    }
     componentDidMount (){
-        const { getItemData, getImage} = this.props
-        getItemData();
-        getImage();
+        const { getAllData} = this.props
+        getAllData();
+        // getItemData();
+        // getImage();
         // var preview = document.querySelector('img');
         //   var file    = event.target.name.files[0];
         //   var reader  = new FileReader();
@@ -68,16 +66,16 @@ class Item extends Component {
     }
     render() {
         const{ item, description, date, price, location, } = this.state
-        console.log("these are your props", this.props);
+        console.log("this is your props", this.props.all.data.data)
         if (this.state.show) {
             return (
                 <div className="modal" onClick={this.hideModal}>
                     <div onClick={e => e.stopPropagation()} className="modal-content">
                         <div onClick={this.hideModal} className="basic-modal-close center">X</div>
                         <div className="card">
-                            <Link to="/"><img className="card-img-top rounded" src={Test} alt="Card image cap" /></Link>
+                            <img className="card-img-top rounded" src={this.state.image} alt="Card image cap" />
                             <div className="card-body">
-                                <h5 className="card-title"><Link to="/">{item}</Link></h5>
+                                <h5 className="card-title">{item}</h5>
                                 <p className="card-text">{description}</p>
                             </div>
                             <ul className="list-group list-group-flush">
@@ -94,6 +92,7 @@ class Item extends Component {
             // if(!this.props.data){
             //     return
             // }
+           
             <div className="all">
                 <div className="row">
                     <div className="col-12 card-container">
@@ -101,18 +100,12 @@ class Item extends Component {
                             <h1>Buy, Sell, Look and Trade.</h1>
                         </div>
                         <div className="row justify-content-center" >
-                        {this.props.imgurl && this.props.data ?
-        this.props.data.map ((item, i) => {
-            //    console.log("image", this.props.imgurl[i].image)
+                        {this.props.all.data.data ?
+        this.props.all.data.data.imageurl.map ((item, i) => {
                 item.date = item.date.substring(0,10);
                 return(
                                 <div className="card col-sm-3" key={i}>
-                                {this.props.imgurl === undefined ?
-                                <img src={None}></img>
-                                   : <img onClick={() => this.showModal(item.i, item.item, item.description, item.date, item.price, item.location, item.image)} className="card-img-top rounded" src={this.props.imgurl[i].image} alt="Card image cap" />
-                        
-                                
-                                }
+                                    <img onClick={() => this.showModal(item.i, item.item, item.description, item.date, item.price, item.location, item.image)} className="card-img-top rounded" src={item.image} alt="Card image cap" />
                                     <div className="card-body">
                                         <h5 onClick={()=>this.showModal(item.i, item.item, item.description, item.date, item.price, item.location, item.image)} className="card-title text-primary">{item.item}</h5>
                                         <p className="card-text">{item.description}</p>
@@ -132,7 +125,6 @@ class Item extends Component {
                 </div>
                 <div className="space"></div>
             </div>
-
         )
     }
 }
@@ -146,6 +138,5 @@ function mapStateToProps(state) {
     }
 }
 export default connect(mapStateToProps, {
-    getItemData,
-    getImage
+    getAllData
 })(Item);

@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import '../assets/css/home.scss'
-import '../assets/css/modal.scss'
 
 class Home extends Component{
     state={
@@ -25,17 +24,12 @@ class Home extends Component{
                 <div className="modal" onClick={this.hideModal}>
                     <div onClick={e => e.stopPropagation()} className="modal-content">
                         <div onClick={this.hideModal} className="basic-modal-close center">X</div>
-                        <div className="card">
+                        <div className="card container">
+                        <h1 className="header">A quick preview</h1>
                             {/* <Link to="/"><img className="card-img-top rounded" src={Test} alt="Card image cap" /></Link> */}
                             <div className="card-body">
-                                {/* <h5 className="card-title"><Link to="/">{item}</Link></h5>
-                                <p className="card-text">{description}</p> */}
+                            <img className="r" src="https://media.giphy.com/media/dn0DxPOOgmC6kNSubU/giphy.gif"></img>
                             </div>
-                            <ul className="list-group list-group-flush">
-                                <li className="list-group-item">Date:</li>
-                                <li className="list-group-item">Price: </li>
-                                <li className="list-group-item">Location: </li>
-                            </ul>
                         </div>
                     </div>
                 </div>

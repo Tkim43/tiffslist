@@ -33,3 +33,36 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  .upload-btn{
+    padding: 7px;
+    font-size: 1.2rem;
+  }
+
+  // .img-container{
+  //   display:flex;
+  //   justify-content: center;
+  //   width: 80%;
+  //   height: 80%;
+  // }
+  .img-container{
+    display: flex;
+    justify-content: center;
+    img{
+      width: 60%;
+      height: 60%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .col-25, .col-75, input[type=file] {
+      width: 90%;
+      margin: auto;
+      border: solid 1px #dfe5e8;
+    }
+    .card-header{
+      h1{
+        font-size: 2rem;
+      }
+    }
+  }
