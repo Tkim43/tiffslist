@@ -129,11 +129,44 @@ app.post('/api/images/itemID/:itemID', async (req, res, next) => {
     
 // }, errorHandling);
 
-app.get('/api/imageurl/', async (req, res, next) => {
+// app.get('/api/imageurl/', async (req, res, next) => {
+//     try {
+//         // const{ID} = req.params;
+//         const query = 'SELECT * FROM ??';
+//         const inserts = ['images'];
+
+//         const sql = mysql.format(query, inserts);
+
+//         const imageurl = await db.query(sql);
+//         res.send({
+//             success: true,
+//             imageurl,
+//         });
+
+//     } catch (err){
+//         console.log('Error:', err);
+//         req.status = 500;
+//         req.error = 'Error getting image URL';
+
+//         return next();
+//     }
+    
+// }, errorHandling);
+
+
+// SELECT * 
+// FROM `item` INNER JOIN `images` 
+// ON item.ID = images.itemID; 
+
+// SELECT i.*, p.image
+// FROM `item` AS i INNER JOIN `images` AS `p`
+// ON i.ID = p.itemID;
+
+app.get('/api/totalitems/', async (req, res, next) => {
     try {
         // const{ID} = req.params;
-        const query = 'SELECT * FROM ??';
-        const inserts = ['images'];
+        const query = 'SELECT * FROM ?? INNER JOIN ?? ON  item.ID = images.itemID';
+        const inserts = ['item', 'images'];
 
         const sql = mysql.format(query, inserts);
 
@@ -146,7 +179,7 @@ app.get('/api/imageurl/', async (req, res, next) => {
     } catch (err){
         console.log('Error:', err);
         req.status = 500;
-        req.error = 'Error getting image URL';
+        req.error = 'Error getting all information';
 
         return next();
     }

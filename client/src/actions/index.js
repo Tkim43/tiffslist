@@ -37,10 +37,19 @@ export async function storeImage(image, itemID){
     
 // }
 
-export async function getImage(){
-    const resp = await axios.get(`/api/imageurl/`)
+// export async function getImage(){
+//     const resp = await axios.get(`/api/imageurl/`)
+//     return{
+//         type: types.GET_IMAGE,
+//         payload: resp
+//     }
+    
+// }
+
+export async function getAllData(){
+    const resp = await axios.get(`/api/totalitems/`)
     return{
-        type: types.GET_IMAGE,
+        type: types.GET_ALL_DATA,
         payload: resp
     }
     

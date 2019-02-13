@@ -45,6 +45,7 @@ class Sell extends Component {
     renderInput = ({
         input,
         label,
+        pattern,
         type,
         meta: { touched, error, warning }
       }) => {
@@ -53,7 +54,7 @@ class Sell extends Component {
         <div className="form-row form-group-row">
             <div className="col">
                 <label>{label}</label>
-                <input className="form-control" {...input} placeholder={label} type={type} />
+                <input className="form-control" {...input} placeholder={label} pattern={pattern} type={type} />
                 {touched &&
                 ((error && <span className="text-danger">{error}</span>) ||
                     (warning && <span>{warning}</span>))}
@@ -68,7 +69,7 @@ class Sell extends Component {
         return (
             <div className="container">
                 <div className="page-header text-center">
-                    <h1>What Would You Like to Sell</h1>
+                    <div className="header">What Would You Like to Sell</div>
                 </div>
                 <form onSubmit={handleSubmit(this.handleForm)}>
                     <div className="" >
@@ -85,7 +86,8 @@ class Sell extends Component {
                         <Field className="col" name="price" type="number" label="Price" component={this.renderInput} />
                     </div>
                     <div className="">
-                        <Field  className="col" name="contact" type="text" label="Contact Information" component={this.renderInput} />
+                        <Field  placeholder="" className="col" name="contact" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel" label="Phone Number" component={this.renderInput} />
+                        <label className="text-muted">Format: 714-123-1234</label>
                     </div>
                     <div className="">
                         <Field  className="col" name="location" type="text" label="Location" component={this.renderInput} />

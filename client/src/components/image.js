@@ -10,9 +10,12 @@ class Image extends Component{
         selectedFile: null,
         selectedFiles: null,
         file: null,
+        loading: false,
+
         fileName: "",
     }
     singleFileChangedHandler = ( event ) => {
+
 		this.setState({
 			selectedFile: event.target.files[0]
         });
@@ -33,7 +36,7 @@ class Image extends Component{
 
     };
     
-    singleFileUploadHandler = ( event ) => {
+    singleFileUploadHandler = async ( event ) => {
 		const data = new FormData();
 // If file selected
 		if ( this.state.selectedFile ) {
@@ -63,16 +66,17 @@ class Image extends Component{
                                 fileName
                             })
                             console.log( 'filedata', fileName );
+        
                             const { match: { params } } = this.props;
-                            storeImage(fileName.location, params.itemID);
-                            this.ocShowAlert( 'File Uploaded', '#3089cf' );
-                            if (fileName) {
-                                console.log("it went in the success")
-                                const{history} = this.props;
-                                history.push('/item')
-                            }
-                            
-                            
+                            this.saveImage(fileName.location, params.itemID)
+
+
+                                this.ocShowAlert( 'File Uploaded', '#3089cf' );
+                                // if (response.data) {
+                                //     console.log("it went in the success")
+                                //     const{history} = this.props;
+                                //     history.push('/item')
+                                // }
 
 							
 						}
@@ -86,6 +90,20 @@ class Image extends Component{
 			this.ocShowAlert( 'Please upload a file', '#ff8a80' );
 		}
     };
+
+    saveImage = (file, itemID)=>{
+        const {storeImage,history} = this.props
+
+        this.setState({
+            loading: true
+        }, async ()=>{
+            await storeImage(file, itemID);
+
+            await history.push('/item')
+        })
+        
+    }
+
     
     ocShowAlert = ( message, background = '#3089cf' ) => {
 		let alertContainer = document.querySelector( '#oc-alert-container' ),
@@ -98,7 +116,7 @@ class Image extends Component{
 		setTimeout( function () {
 			$( alertEl ).fadeOut( 'slow' );
 			$( alertEl ).remove();
-		}, 3000 );
+		}, 1000 );
 	};
     newMethod() {
         $("#somediv").addClass("thisClass");
@@ -106,31 +124,35 @@ class Image extends Component{
 
     render(){
         console.log("this is your props", this.props)
-        // if(this.state.fileName === ){
-        //     return(
-        //         <div className="loading container justify-content-center">
-        //             <div className="loader"></div>
-        //         </div>
-        //     )
-        // }
+        if(this.state.loading){
+            return(
+                <div className="loading container justify-content-center">
+                    <div className="loader"></div>
+                </div>
+            )
+        }
         return(
             <div className="container">
             <div className="text-white" id="oc-alert-container"></div>
 				{/* Single File Upload*/}
 				<div className="card border-light mb-3 mt-5" style={{ boxShadow: '0 5px 10px 2px rgba(195,192,192,.5)' }}>
 					<div className="card-header">
-						<h3 style={{ color: '#555', marginLeft: '12px' }}>Image Uploader</h3>
-						<p className="text-muted" style={{ marginLeft: '12px' }}>Upload Size: 250px x 250px ( Max 2MB )</p>
+						<h1 style={{ color: '#555', marginLeft: '12px' }}>Image Uploader</h1>
+						{/* <p className="text-muted" style={{ marginLeft: '12px' }}>Upload Size: 250px x 250px ( Max 2MB )</p> */}
 					</div>
 					<div className="card-body">
 						<p className="card-text">Please upload an image for the item you wish to sell.</p>
-						<input type="file" onChange={this.singleFileChangedHandler}/>
+						<input accept=".png, .jpeg, .gif, .jpg, .pdf, .tif, " type="file" onChange={this.singleFileChangedHandler}/>
 						<div className="mt-5">
-							<button className="btn btn-info" onClick={this.singleFileUploadHandler}>Upload!</button>
+							<button className="upload-btn btn btn-info" onClick={this.singleFileUploadHandler}>Upload</button>
 						</div>
 					</div>
 				</div>
-                <img></img>
+                <h3 className="text-center">Preview of your image down below <i className="fas fa-arrow-down"></i></h3>
+                <div className="img-container">
+                    <img className="img-size"/>
+                </div>
+                
                 <div className="space"></div>
                 </div>
         )
@@ -146,5 +168,5 @@ function mapStateToProps(state) {
 
 
 export default connect(mapStateToProps, {
-    // storeImage,
+    storeImage,
 })(Image);
