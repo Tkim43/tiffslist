@@ -1,6 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
-const db = require('./Server/db');
+const db = require('./server/db');
 const app = express();
 const cors = require('cors');
 const { resolve } = require('path');
