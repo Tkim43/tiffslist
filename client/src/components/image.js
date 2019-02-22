@@ -1,7 +1,6 @@
 import React, {Component,Fragment} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import $ from 'jquery';
 import '../assets/css/image.scss'
 import {storeImage} from '../actions/index'
 
@@ -110,16 +109,23 @@ class Image extends Component{
 			alertEl = document.createElement( 'div' ),
 			textNode = document.createTextNode( message );
 		alertEl.setAttribute( 'class', 'oc-alert-pop-up' );
-		$( alertEl ).css( 'background', background );
+        // $( alertEl ).css( 'background', background );
+        alertEl.style.backgroundColor = background
 		alertEl.appendChild( textNode );
 		alertContainer.appendChild( alertEl );
 		setTimeout( function () {
-			$( alertEl ).fadeOut( 'slow' );
-			$( alertEl ).remove();
+            // $( alertEl ).fadeOut( 'slow' );
+            alertEl.style.opacity -=0.1;
+            // $( alertEl ).remove();
+            alertEl.style.display ="none";
+            // alertEl.style.display =""
 		}, 1000 );
 	};
     newMethod() {
-        $("#somediv").addClass("thisClass");
+        // $("#somediv").addClass("thisClass");
+        var element = document.getElementById('#somediv');
+        element.classList.add('thisClass');
+        // element.classList.add('class');
     }
 
     render(){
