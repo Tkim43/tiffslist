@@ -4,7 +4,7 @@ const db = require('./server/db');
 const app = express();
 const cors = require('cors');
 const { resolve } = require('path');
-const PORT = process.env.PORT || 9001;
+const PORT = process.env.PORT || 9000;
 
 
 app.use(express.static(resolve(__dirname,'client','dist')));

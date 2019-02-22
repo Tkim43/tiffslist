@@ -5,7 +5,7 @@
   "main": "index.js",
   "proxy": {
     "/api/*": {
-      "target": "http://localhost:9000"
+      "target": "http://localhost:9001"
     }
   },
   "scripts": {
@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "jquery": "^3.3.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.1.1",

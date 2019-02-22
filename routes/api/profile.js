@@ -1,5 +1,3 @@
-
-
 const express = require( 'express' );
 const aws = require( 'aws-sdk' );
 const multerS3 = require( 'multer-s3' );
