@@ -80,7 +80,7 @@ class Sell extends Component {
                         <Field  maxLength="20" className="col-6" name="last" label="Last Name" component={this.renderInput} />
                     </div>
                     <div className="">
-                        <Field  maxLength="25" className="col" name="item" type="text" label="Item for sale" component={this.renderInput} />
+                        <Field  maxLength="25" className="col" name="item" type="text" label="Title" component={this.renderInput} />
                     </div>
                     <div className="">
                         <Field  maxLength="150" className="col" name="description" type="text" label="Description" component={this.renderInput} />
@@ -89,7 +89,7 @@ class Sell extends Component {
                         <Field  maxLength="7" pattern="\d*" className="col" name="price" type="text" label="Price" component={this.renderInput} />
                     </div>
                     <div className="">
-                        <Field  maxLength="12" placeholder="" className="col" name="contact" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel" label="Phone Number" component={this.renderInput} />
+                        <Field  maxLength="12" placeholder="" className="col" name="contact" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" type="text" label="Phone Number" component={this.renderInput} />
                         <label className="text-muted">Format: 714-123-1234</label>
                     </div>
                     <div className="">
