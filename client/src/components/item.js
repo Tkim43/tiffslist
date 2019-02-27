@@ -107,7 +107,7 @@ class Item extends Component {
                                 <div className="card col-sm-3" key={i}>
                                     <img onClick={() => this.showModal(item.i, item.item, item.description, item.date, item.price, item.location, item.image)} className="card-img-top rounded" src={item.image} alt="Card image cap" />
                                     <div className="card-body">
-                                        <h5 onClick={()=>this.showModal(item.i, item.item, item.description, item.date, item.price, item.location, item.image)} className="card-title text-primary">{item.item}</h5>
+                                        <h5 onClick={()=>this.showModal(item.i, item.item, item.description, item.date, item.price, item.location, item.image)} className="card-title">{item.item}</h5>
                                         <p className="card-text">{item.description}</p>
                                     </div>
                                     <ul className="list-group list-group-flush midText">
