@@ -1,6 +1,7 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {Link} from 'react-router-dom'
 import '../assets/css/home.scss'
+// import Black from '../assets/images/black.jpeg'
 
 class Home extends Component{
     state={
@@ -36,23 +37,29 @@ class Home extends Component{
             )
         }
         return(
-        <div className="container jumboContainer">
-            <div className="jumbotron jumboTop">
-                <h1 className="display-4 welcome">Welcome!</h1>
-                <p className="lead">Tiffslist is an American classified advertisements website which is devoted to for sale items, items wanted, community, gigs, and discussion forums.</p>
-                <hr className="my-4"></hr>
-                <p>This website was built using React.JS, Node.JS, Redux, Javascript mySQL, CSS, SCSS, HTML and Bootstrap CSS.</p>
-                <Link className="btn btn-primary btn-lg" to="/about" role="button">About Me</Link>
+        <Fragment>
+            <div className="header">
+                <h1 className="title">Tiffslist</h1>
+                <div id="hexagon"></div>
             </div>
-            <div className="jumbotron">
-                <h1 className="display-4 preview">How to use the website</h1>
-                <p className="lead">I have provided a preview of how the website works.</p>
-                <hr className="my-4"></hr>
-                <p>Click preview to start.</p>
-                <button className="btn btn-info btn-lg" onClick={this.showModal} role="button">Preview</button>
+            <div className="container jumboContainer">
+                <div className="jumbotron jumboTop">
+                    <h1 className="display-4 welcome">Welcome!</h1>
+                    <p className="lead">Tiffslist is an American classified advertisements website which is devoted to for sale items, items wanted, community, gigs, and discussion forums.</p>
+                    <hr className="my-4"></hr>
+                    <p>This website was built using React.JS, Node.JS, Redux, Javascript mySQL, CSS, SCSS, HTML and Bootstrap CSS.</p>
+                    <Link className="btn btn-primary btn-lg" to="/about" role="button">About Me</Link>
+                </div>
+                <div className="jumbotron">
+                    <h1 className="display-4 preview">How to use the website</h1>
+                    <p className="lead">I have provided a preview of how the website works.</p>
+                    <hr className="my-4"></hr>
+                    <p>Click preview to start.</p>
+                    <button className="btn btn-info btn-lg" onClick={this.showModal} role="button">Preview</button>
+                </div>
+                <div className="space"></div>
             </div>
-            <div className="space"></div>
-        </div>
+        </Fragment>
         )
     }
 }

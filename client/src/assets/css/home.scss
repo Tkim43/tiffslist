@@ -78,16 +78,56 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .modal{
-        .modal-content h1 {
-            font-size: 1.3rem;
-        }
-        .modal-content{
-            width: 80%;
-        }
+.modal{
+    .modal-content h1 {
+        font-size: 1.3rem;
     }
-    
-    // .modal-content{
-    //     width: 80%;
-    // }
+    .modal-content{
+        width: 80%;
+    }
+}
+
+// .modal-content{
+//     width: 80%;
+// }
+}
+
+.header {
+    .title{
+        padding: 60px;
+        text-align: center;
+        background: #1abc9c;
+        color: white;
+        font-size: 3rem;
+        margin: 0px;
+    }
+}
+
+#hexagon {
+    width: 100px;
+    height: 55px;
+    background: #d65454;
+    position: relative;
   }
+#hexagon:before {
+    content: "";
+    position: absolute;
+    top: -25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 25px solid white;
+}
+#hexagon:after {
+    content: "";
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 25px solid #d65454;
+}  
