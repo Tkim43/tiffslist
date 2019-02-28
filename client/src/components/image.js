@@ -10,7 +10,6 @@ class Image extends Component{
         selectedFiles: null,
         file: null,
         loading: false,
-
         fileName: "",
     }
     singleFileChangedHandler = ( event ) => {
@@ -98,7 +97,7 @@ class Image extends Component{
         }, async ()=>{
             await storeImage(file, itemID);
 
-            await history.push('/item')
+            await history.push(`/preview/itemID/${itemID}`)
         })
         
     }

@@ -54,3 +54,11 @@ export async function getAllData(){
     }
     
 }
+
+export async function getSingleItem(itemID){
+    const resp = await axios.get(`/api/singleItem/itemID/${itemID}/`)
+    return{
+        type: types.GET_SINGLE_ITEM,
+        payload: resp
+    }
+}

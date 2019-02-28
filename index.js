@@ -186,6 +186,30 @@ app.get('/api/totalitems/', async (req, res, next) => {
     
 }, errorHandling);
 
+app.get('/api/singleItem/itemID/:itemID/', async (req, res, next) => {
+    try {
+        const{itemID} = req.params;
+        const query = 'SELECT * FROM ?? INNER JOIN ?? ON  item.ID = images.itemID WHERE ?? = ?';
+        const inserts = ['item', 'images', 'itemID', itemID];
+
+        const sql = mysql.format(query, inserts);
+
+        const item = await db.query(sql);
+        res.send({
+            success: true,
+            item,
+        });
+
+    } catch (err){
+        console.log('Error:', err);
+        req.status = 500;
+        req.error = 'Error getting preview information';
+
+        return next();
+    }
+    
+}, errorHandling);
+
 
 
 
