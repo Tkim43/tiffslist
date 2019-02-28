@@ -97,7 +97,7 @@ class Item extends Component {
                 <div className="row">
                     <div className="col-12 card-container">
                         <div className="page-header text-center">
-                            <h1>Buy, Sell, Look and Trade.</h1>
+                            <h1 className="buy-sell">Buy, Sell, Look and Trade.</h1>
                         </div>
                         <div className="row justify-content-center" >
                         {this.props.all.data.data ?

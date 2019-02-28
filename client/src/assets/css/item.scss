@@ -14,11 +14,17 @@
 
 .card-container{
     .page-header{
-        color: #a88809c7;
+        // color: #a88809c7;
+        color: #0fc5a1;
+        text-shadow: 2px 2px white;
         font-family: 'Dancing Script', cursive;
         margin: 3%;
     }
     
+}
+
+.buy-sell{
+    font-size: 4rem;
 }
 
 h5{

@@ -8,9 +8,10 @@ margin: auto;
 }
 
 h2{
-margin-top: 4%;
+    margin-top: 4%;
     a{
-        color: #a88809c7;
+        // color: #a88809c7;
+        color: rgb(78, 76, 76);
     }
     
 }
@@ -18,42 +19,44 @@ margin-top: 4%;
 h3{
     font-family: 'Permanent Marker', cursive;
     color: rgb(3, 35, 53);
-
 }
 p{
     font-family:'Cinzel', serif;
 }
-h1 {
-text-align: center;
-font-size: 50px;
-margin: 1%;
-word-break: break-all;
-font-family: 'Satisfy', cursive;
+
+.name{
+    text-align: center;
+    font-size: 50px;
+    margin: 1%;
+    word-break: break-all;
+    font-family: 'Satisfy', cursive;
+    color: #0fc5a1;
+    text-shadow: 2px 2px white;
 }
 
 .row {
-margin: 8px -16px;
+    margin: 8px -16px;
 }
 
 .row,
 .row > .column {
-padding: 8px;
+    padding: 8px;
 }
 
 .column {
-float: left;
-width: 25%;
+    float: left;
+    width: 25%;
 }
 
 .row:after {
-content: "";
-display: table;
-clear: both;
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .content {
-background-color: white;
-padding: 10px;
+    background-color: white;
+    padding: 10px;
 }
 
 @media screen and (max-width: 900px) {

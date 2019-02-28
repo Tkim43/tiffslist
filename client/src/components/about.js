@@ -12,7 +12,7 @@ class About extends Component {
         return (
             <Fragment>
                 <div className="main container">
-                    <h1>Tiffany Kim</h1>
+                    <h1 className="name">Tiffany Kim</h1>
                     <h2><a href="https://www.Tiffanyykim.com/">Portfolio Website</a></h2>
                     <p>I love to build, design and problem solve. Please check out my portfolio website to see my projects and work.</p>
                     <div className="row">
