@@ -61,7 +61,7 @@ class Nav extends Component{
         return(
             <Fragment>
                 <nav className="navbar navbar-expand-lg navbar">
-                    <Link className="navbar-brand" to="/" >Tiffslist</Link>
+                    <Link className="navbar-brand" to="/">Tiffslist <i class="fas fa-list-alt"></i></Link>
                     <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
                         <ul className="nav nav-tabs">
                             {this.renderLinks()}
